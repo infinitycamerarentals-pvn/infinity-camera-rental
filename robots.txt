@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://infinitycamerarental.com/sitemap.xml
