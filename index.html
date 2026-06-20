@@ -1618,25 +1618,25 @@
   overflow-x: visible;
 }
 .gear-tab {
-  background: none;
-  border: none;
-  color: var(--muted);
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--text);
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
-  padding: 0.45rem 0.6rem;
+  padding: 0.6rem 0.9rem;
   cursor: pointer;
-  border-radius: 6px;
-  transition: color 0.2s, background 0.2s;
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
   white-space: nowrap;
   text-align: left;
   width: 100%;
 }
-.gear-tab:hover { color: var(--text); background: var(--surface); }
+.gear-tab:hover { border-color: #aaa; }
 .gear-tab.gear-tab-active {
-  color: var(--text);
   font-weight: 700;
-  background: none;
+  border-color: var(--text);
+  border-width: 1.5px;
 }
 
 
