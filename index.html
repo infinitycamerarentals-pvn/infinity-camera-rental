@@ -1504,6 +1504,11 @@
       .footer-top { flex-direction: column; align-items: flex-start; }
       .footer-links { flex-wrap: wrap; gap: 1rem; }
       .section-header-row { flex-direction: column; align-items: flex-start; }
+      .gear-catalog-layout { flex-direction: column; }
+      .gear-sidebar { width: 100%; min-width: unset; position: static; }
+      .gear-tab-bar { flex-direction: row; flex-wrap: wrap; gap: 0.4rem; }
+      .gear-tab { width: auto; font-size: 0.82rem; padding: 0.4rem 0.8rem; border: 1px solid var(--border); border-radius: 20px; }
+      .gear-tab.gear-tab-active { background: var(--text); color: var(--white); border-color: var(--text); }
       .gear-grid { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: 1fr; }
       .reviews-grid { grid-template-columns: 1fr; }
@@ -1562,43 +1567,76 @@
     .reviews-google-btn:hover { border-color: #4285F4; box-shadow: 0 4px 16px rgba(66,133,244,0.15); }
 
   
-/* Gear Tabs */
+/* Gear Catalog Layout */
+.gear-catalog-layout {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+.gear-sidebar {
+  width: 200px;
+  min-width: 200px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1rem;
+  position: sticky;
+  top: 80px;
+}
+.gear-sidebar-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+.gear-sidebar-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.gear-sidebar-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin-bottom: 0.75rem;
+}
+.gear-catalog-content { flex: 1; min-width: 0; }
+
+/* Gear Tabs — now vertical sidebar list */
 .gear-tab-bar {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0;
-  position: sticky;
-  top: 64px;
-  z-index: 100;
-  background: var(--black);
-  padding-top: 1rem;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+  flex-direction: column;
+  gap: 2px;
+  background: none;
+  border-bottom: none;
+  padding: 0;
+  position: static;
+  overflow-x: visible;
 }
-.gear-tab-bar::-webkit-scrollbar { display: none; }
 .gear-tab {
   background: none;
   border: none;
-  color: #8a9bb5;
+  color: var(--muted);
   font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 600;
-  padding: 0.65rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding: 0.45rem 0.6rem;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  border-radius: 6px 6px 0 0;
-  transition: color 0.2s, border-color 0.2s;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
   white-space: nowrap;
+  text-align: left;
+  width: 100%;
 }
-.gear-tab:hover { color: #fff; }
+.gear-tab:hover { color: var(--text); background: var(--surface); }
 .gear-tab.gear-tab-active {
-  color: var(--brand);
-  border-bottom: 2px solid var(--brand);
+  color: var(--text);
+  font-weight: 700;
+  background: none;
 }
 
 
@@ -1959,17 +1997,24 @@
 </div>
 <a class="btn-primary" href="#booking" style="white-space: nowrap; flex-shrink: 0;">Request Custom Package</a>
 </div>
-<div class="gear-tab-bar" role="tablist">
-  <button class="gear-tab gear-tab-active" data-tab="cameras" role="tab" onclick="switchGearTab(this)">Cameras</button>
-  <button class="gear-tab" data-tab="action-cams" role="tab" onclick="switchGearTab(this)">Action Cams</button>
-  <button class="gear-tab" data-tab="lenses" role="tab" onclick="switchGearTab(this)">Lenses</button>
-  <button class="gear-tab" data-tab="video-lights" role="tab" onclick="switchGearTab(this)">Video Lights</button>
-  <button class="gear-tab" data-tab="photo-lights" role="tab" onclick="switchGearTab(this)">Photo Lights</button>
-  <button class="gear-tab" data-tab="gimbals" role="tab" onclick="switchGearTab(this)">Gimbals</button>
-  <button class="gear-tab" data-tab="accessories" role="tab" onclick="switchGearTab(this)">Accessories</button>
-  <button class="gear-tab" data-tab="audio" role="tab" onclick="switchGearTab(this)">Audio</button>
-  <button class="gear-tab" data-tab="drones" role="tab" onclick="switchGearTab(this)">Drones</button>
-</div>
+<div class="gear-catalog-layout">
+<aside class="gear-sidebar">
+  <h3 class="gear-sidebar-title">Filters</h3>
+  <span class="gear-sidebar-label">CATEGORIES</span>
+  <hr class="gear-sidebar-divider">
+  <div class="gear-tab-bar" role="tablist">
+    <button class="gear-tab gear-tab-active" data-tab="cameras" role="tab" onclick="switchGearTab(this)">Cameras</button>
+    <button class="gear-tab" data-tab="action-cams" role="tab" onclick="switchGearTab(this)">Action Cams</button>
+    <button class="gear-tab" data-tab="lenses" role="tab" onclick="switchGearTab(this)">Lenses</button>
+    <button class="gear-tab" data-tab="video-lights" role="tab" onclick="switchGearTab(this)">Video Lights</button>
+    <button class="gear-tab" data-tab="photo-lights" role="tab" onclick="switchGearTab(this)">Photo Lights</button>
+    <button class="gear-tab" data-tab="gimbals" role="tab" onclick="switchGearTab(this)">Gimbals</button>
+    <button class="gear-tab" data-tab="accessories" role="tab" onclick="switchGearTab(this)">Accessories</button>
+    <button class="gear-tab" data-tab="audio" role="tab" onclick="switchGearTab(this)">Audio</button>
+    <button class="gear-tab" data-tab="drones" role="tab" onclick="switchGearTab(this)">Drones</button>
+  </div>
+</aside>
+<div class="gear-catalog-content">
 <div class="gear-tab-panel" data-panel="cameras">
 <div class="catalog-section">
 <div class="catalog-cat-header">
@@ -2582,6 +2627,8 @@
 <div class="gear-desc">4/3-inch CMOS sensor, 6K video, 3-axis gimbal with 360° rotation. Professional aerial cinematography.</div>
 <div class="gear-footer">
 <div class="gear-price-tag">₹3,500 / day</div><a class="gear-cta" href="https://wa.me/919505011266?text=Hi%2C%20I%20want%20to%20enquire%20about%20DJI%20Mavic%204%20Pro%20rental.%20Please%20share%20availability%20and%20pricing." target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11 19.79 19.79 0 01.5 2.38 2 2 0 012.47.5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.44a16 16 0 006.29 6.29l1.31-1.31a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7a2 2 0 011.72 2.02z"/></svg> Enquire on WhatsApp</a>
+</div>
+</div>
 </div>
 </div>
 </div>
