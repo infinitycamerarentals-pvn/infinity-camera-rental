@@ -1639,6 +1639,40 @@
   border-width: 1.5px;
 }
 
+/* Mobile catalog: later rules above override the earlier 680px block,
+   so the sidebar stayed sticky and covered the gear photos. */
+@media (max-width: 680px) {
+  .gear-catalog-layout {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .gear-sidebar {
+    width: 100%;
+    min-width: 0;
+    position: static;
+    top: auto;
+  }
+  .gear-tab-bar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .gear-tab {
+    width: auto;
+    font-size: 0.82rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+  }
+  .gear-tab.gear-tab-active {
+    background: var(--text);
+    color: var(--white);
+    border-color: var(--text);
+  }
+  .gear-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* Packages Section */
 #packages { background: #f8fafc; }
