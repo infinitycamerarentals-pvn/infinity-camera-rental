@@ -1516,6 +1516,18 @@
       .gear-tab-bar { flex-direction: row; flex-wrap: wrap; gap: 0.4rem; }
       .gear-tab { width: auto; font-size: 0.82rem; padding: 0.4rem 0.8rem; border: 1px solid var(--border); border-radius: 20px; }
       .gear-tab.gear-tab-active { background: var(--text); color: var(--white); border-color: var(--text); }
+      .gear-tab[data-tab="cinema-line-cameras"],
+      .gear-tab[data-tab="cine-lenses"] {
+        color: var(--brand-dk);
+        background: var(--brand-pale);
+        border-color: var(--brand);
+      }
+      .gear-tab[data-tab="cinema-line-cameras"].gear-tab-active,
+      .gear-tab[data-tab="cine-lenses"].gear-tab-active {
+        color: var(--black);
+        background: var(--brand);
+        border-color: var(--brand-dk);
+      }
       .gear-grid { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: 1fr; }
       .reviews-grid { grid-template-columns: 1fr; }
@@ -1645,6 +1657,27 @@
   border-color: var(--text);
   border-width: 1.5px;
 }
+/* Specialty cinema categories — Filters sidebar pills only */
+.gear-tab[data-tab="cinema-line-cameras"],
+.gear-tab[data-tab="cine-lenses"] {
+  color: var(--brand-dk);
+  background: var(--brand-pale);
+  border-color: var(--brand);
+  font-weight: 600;
+}
+.gear-tab[data-tab="cinema-line-cameras"]:hover,
+.gear-tab[data-tab="cine-lenses"]:hover {
+  border-color: var(--brand-dk);
+  background: #ffe9b8;
+}
+.gear-tab[data-tab="cinema-line-cameras"].gear-tab-active,
+.gear-tab[data-tab="cine-lenses"].gear-tab-active {
+  color: var(--black);
+  background: var(--brand);
+  border-color: var(--brand-dk);
+  border-width: 1.5px;
+  font-weight: 700;
+}
 
 /* Mobile catalog: later rules above override the earlier 680px block,
    so the sidebar stayed sticky and covered the gear photos. */
@@ -1674,6 +1707,18 @@
     background: var(--text);
     color: var(--white);
     border-color: var(--text);
+  }
+  .gear-tab[data-tab="cinema-line-cameras"],
+  .gear-tab[data-tab="cine-lenses"] {
+    color: var(--brand-dk);
+    background: var(--brand-pale);
+    border-color: var(--brand);
+  }
+  .gear-tab[data-tab="cinema-line-cameras"].gear-tab-active,
+  .gear-tab[data-tab="cine-lenses"].gear-tab-active {
+    color: var(--black);
+    background: var(--brand);
+    border-color: var(--brand-dk);
   }
   .gear-grid {
     grid-template-columns: 1fr;
