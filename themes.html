@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Pick a theme — Infinity Camera Rental</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Libre+Franklin:wght@300;400;500;600&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #111; }
+  .pick { position: sticky; top: 0; z-index: 5; display: flex; gap: 10px; align-items: center; padding: 14px 16px; background: #111; color: #fff; font-family: Outfit, sans-serif; }
+  .pick a { color: #fff; text-decoration: none; border: 1px solid #fff; border-radius: 999px; padding: 8px 14px; font-size: 14px; }
+  .pick strong { margin-right: auto; font-weight: 500; }
+  .cap { padding: 22px 20px 8px; color: #fff; font-family: Outfit, sans-serif; }
+  .cap b { display: block; font-size: 28px; }
+  .cap span { opacity: 0.7; font-size: 14px; }
+
+  .a { background: #f3efe6; color: #1c1915; font-family: Outfit, sans-serif; }
+  .a-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 28px; border-bottom: 1px solid #ddd6c8; flex-wrap: wrap; }
+  .a-mark { font-family: "Cormorant Garamond", serif; letter-spacing: 0.28em; font-size: 15px; font-weight: 600; }
+  .a nav { display: flex; gap: 18px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #5c564c; flex-wrap: wrap; }
+  .a-hero { display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 40px; padding: 56px 28px 40px; align-items: end; }
+  .a-kicker { font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #8a7355; margin-bottom: 18px; }
+  .a h1 { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: clamp(42px, 6vw, 76px); line-height: 0.92; margin: 0; }
+  .a h1 em { font-style: italic; }
+  .a-lede { margin-top: 22px; max-width: 420px; font-weight: 300; font-size: 16px; line-height: 1.6; color: #4a453d; }
+  .a-link { display: inline-block; margin-top: 22px; font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; border-bottom: 1px solid #1c1915; padding-bottom: 4px; }
+  .a-card { border-top: 1px solid #1c1915; padding-top: 18px; }
+  .a-card h2 { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 500; margin: 0 0 12px; }
+  .a-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #ddd6c8; font-size: 14px; }
+  .a-note { margin-top: 16px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7355; }
+
+  .n { background: #100f0d; color: #f4efe6; font-family: Outfit, sans-serif; }
+  .n header { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 22px 28px; border-bottom: 1px solid rgba(196,165,116,0.35); flex-wrap: wrap; }
+  .n-mark { font-family: "Cormorant Garamond", serif; letter-spacing: 0.32em; font-size: 14px; }
+  .n nav { display: flex; gap: 16px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #c4a574; flex-wrap: wrap; }
+  .n-hero { padding: 64px 28px 36px; }
+  .n-kicker { color: #c4a574; letter-spacing: 0.22em; font-size: 11px; text-transform: uppercase; }
+  .n h1 { font-family: "Cormorant Garamond", serif; font-weight: 500; font-style: italic; font-size: clamp(46px, 7vw, 84px); line-height: 0.9; margin: 16px 0 0; max-width: 820px; }
+  .n-rule { width: 72px; height: 1px; background: #c4a574; margin: 24px 0; }
+  .n p { max-width: 460px; font-weight: 300; color: #cfc6b8; line-height: 1.7; }
+  .n-kits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; border-top: 1px solid rgba(244,239,230,0.15); }
+  .n-kit { padding-top: 18px; }
+  .n-kit span { display: block; color: #c4a574; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 8px; }
+  .n-kit strong { font-family: "Cormorant Garamond", serif; font-size: 28px; font-weight: 500; }
+  .n-kit em { display: block; margin-top: 6px; font-style: normal; color: #cfc6b8; font-size: 14px; }
+
+  .g { background: #fff; color: #111; font-family: "Libre Franklin", sans-serif; }
+  .g header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 24px; border-bottom: 1px solid #111; flex-wrap: wrap; }
+  .g-mark { font-weight: 600; letter-spacing: 0.22em; font-size: 13px; }
+  .g-dot { display: inline-block; width: 8px; height: 8px; background: #c8102e; margin-right: 10px; }
+  .g nav { display: flex; gap: 16px; font-size: 13px; flex-wrap: wrap; }
+  .g-hero { display: grid; grid-template-columns: 1fr 1fr; min-height: 480px; }
+  .g-copy { padding: 48px 28px; border-right: 1px solid #111; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; }
+  .g h1 { font-weight: 500; font-size: clamp(36px, 5vw, 64px); letter-spacing: -0.045em; line-height: 0.95; margin: 0; }
+  .g-meta { font-size: 13px; }
+  .g-frame { margin: 28px; border: 1px solid #111; display: flex; flex-direction: column; justify-content: flex-end; padding: 28px; background: #f7f7f7; min-height: 320px; }
+  .g-frame small { letter-spacing: 0.18em; text-transform: uppercase; font-size: 11px; }
+  .g-frame strong { display: block; margin-top: 8px; font-size: 32px; font-weight: 500; letter-spacing: -0.03em; }
+  .g-frame em { font-style: normal; color: #c8102e; font-weight: 500; }
+  @media (max-width: 800px) {
+    .a-hero, .g-hero, .n-kits { grid-template-columns: 1fr; }
+    .g-copy { border-right: 0; border-bottom: 1px solid #111; }
+  }
+</style>
+</head>
+<body>
+<div class="pick">
+  <strong>Pick one</strong>
+  <a href="#atelier">1 Atelier</a>
+  <a href="#noir">2 Noir</a>
+  <a href="#gallery">3 Gallery</a>
+</div>
+
+<div class="cap" id="atelier"><b>1. Atelier</b><span>Warm paper. Printed rate card.</span></div>
+<section class="a">
+  <header class="a-bar">
+    <div class="a-mark">INFINITY</div>
+    <nav><span>Cameras</span><span>Lenses</span><span>Lights</span><span>Gimbals</span></nav>
+    <div class="a-mark" style="letter-spacing:0.14em;font-size:13px;">Hyderabad</div>
+  </header>
+  <div class="a-hero">
+    <div>
+      <div class="a-kicker">Camera rental · Manikonda · Since 2020</div>
+      <h1>The house kit,<br/><em>kept for the day.</em></h1>
+      <p class="a-lede">Sony, Canon, and cinema lights. Tested before every pickup. One call, then you collect from OU Colony.</p>
+      <div class="a-link">Request the day</div>
+    </div>
+    <aside class="a-card">
+      <h2>Today’s card</h2>
+      <div class="a-row"><span>Sony FX3</span><b>₹2,500</b></div>
+      <div class="a-row"><span>24–70mm GM</span><b>₹1,500</b></div>
+      <div class="a-row"><span>RS 4 Pro</span><b>₹1,500</b></div>
+      <p class="a-note">95050 11266 · WhatsApp</p>
+    </aside>
+  </div>
+</section>
+
+<div class="cap" id="noir"><b>2. Noir</b><span>Black page. Brass line.</span></div>
+<section class="n">
+  <header>
+    <div class="n-mark">INFINITY</div>
+    <nav><span>Cameras</span><span>Lenses</span><span>Light</span><span>Motion</span></nav>
+    <div class="n-mark">Hyderabad</div>
+  </header>
+  <div class="n-hero">
+    <div class="n-kicker">Professional rental · OU Colony</div>
+    <h1>Gear worthy of the call sheet.</h1>
+    <div class="n-rule"></div>
+    <p>Cinema cameras, master primes, and studio light. Prepared, insured, and collected from Manikonda.</p>
+    <div class="n-kits">
+      <div class="n-kit"><span>Camera</span><strong>Sony FX3</strong><em>₹2,500 / day</em></div>
+      <div class="n-kit"><span>Lens</span><strong>24–70 GM</strong><em>₹1,500 / day</em></div>
+      <div class="n-kit"><span>Support</span><strong>RS 4 Pro</strong><em>₹1,500 / day</em></div>
+    </div>
+  </div>
+</section>
+
+<div class="cap" id="gallery"><b>3. Gallery</b><span>White page. Red price.</span></div>
+<section class="g">
+  <header>
+    <div class="g-mark"><span class="g-dot"></span>INFINITY</div>
+    <nav><span>Cameras</span><span>Lenses</span><span>Lights</span><span>Audio</span></nav>
+    <div class="g-mark">Hyderabad</div>
+  </header>
+  <div class="g-hero">
+    <div class="g-copy">
+      <h1>Camera rental,<br/>without the noise.</h1>
+      <p class="g-meta"><b>Manikonda.</b> Flat 498, near Bheema’s Hotel.<br/>Call 95050 11266.</p>
+    </div>
+    <div class="g-frame">
+      <small>Plate 01 · Cinema body</small>
+      <strong>Sony FX3 <em>₹2,500</em></strong>
+    </div>
+  </div>
+</section>
+</body>
+</html>
