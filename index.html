@@ -490,96 +490,6 @@
       text-transform: uppercase;
     }
 
-    /* ── HOW IT WORKS ── */
-    #how-it-works {
-      background: var(--black);
-      padding: 70px 5%;
-      text-align: center;
-    }
-    .hiw-tag {
-      display: inline-block;
-      background: var(--brand);
-      color: var(--black);
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.35rem 0.9rem;
-      border-radius: 2px;
-      margin-bottom: 1rem;
-    }
-    #how-it-works h2 {
-      font-family: 'Bebas Neue', var(--condensed);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      color: var(--white);
-      font-weight: 400;
-      letter-spacing: 0.04em;
-      margin-bottom: 3rem;
-    }
-    .hiw-steps {
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      max-width: 900px;
-      margin: 0 auto;
-      position: relative;
-    }
-    .hiw-steps::before {
-      content: '';
-      position: absolute;
-      top: 2.4rem;
-      left: calc(16.66% + 1.5rem);
-      right: calc(16.66% + 1.5rem);
-      height: 2px;
-      background: var(--border);
-    }
-    .hiw-step {
-      flex: 1;
-      padding: 0 1.5rem;
-      position: relative;
-    }
-    .hiw-num {
-      width: 4.5rem;
-      height: 4.5rem;
-      border-radius: 50%;
-      background: var(--surface);
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.25rem;
-      position: relative;
-      z-index: 1;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .hiw-step:hover .hiw-num {
-      background: var(--brand);
-      border-color: var(--brand);
-    }
-    .hiw-num svg {
-      width: 1.6rem;
-      height: 1.6rem;
-      stroke: var(--brand);
-      fill: none;
-      stroke-width: 1.8;
-      transition: stroke 0.2s;
-    }
-    .hiw-step:hover .hiw-num svg { stroke: var(--black); }
-    .hiw-step h3 {
-      font-family: 'Barlow Condensed', var(--condensed);
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-    }
-    .hiw-step p {
-      font-size: 0.82rem;
-      color: var(--muted);
-      line-height: 1.65;
-    }
-
     /* ── SECTIONS ── */
     section { padding: 80px 5%; }
     .section-tag {
@@ -1529,9 +1439,6 @@
     @media (max-width: 920px) {
       .booking-layout, .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .contact-layout { grid-template-columns: 1fr; }
-      .hiw-steps { flex-direction: column; align-items: center; gap: 2rem; }
-      .hiw-steps::before { display: none; }
-      .hiw-step { width: 100%; max-width: 280px; }
       .stat-band { flex-wrap: wrap; justify-content: flex-start; }
       .stat-item { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem; max-width: none; text-align: left; }
       .stat-item:last-child { border-bottom: none; }
@@ -2117,40 +2024,6 @@
 <div class="stat-item">
 <div class="stat-val" data-text="24hr">24hr</div>
 <div class="stat-label">Turnaround</div>
-</div>
-</div>
-<!-- HOW IT WORKS -->
-<div id="how-it-works">
-<span class="hiw-tag">How it Works</span>
-<h2>Rent Gear in 3 Simple Steps</h2>
-<div class="hiw-steps">
-<div class="hiw-step">
-<div class="hiw-num">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<circle cx="11" cy="11" r="7"></circle><line x1="16.5" x2="21" y1="16.5" y2="21"></line>
-</svg>
-</div>
-<h3>Browse</h3>
-<p>Explore our full range of cameras, lenses, lights, drones, and accessories.</p>
-</div>
-<div class="hiw-step">
-<div class="hiw-num">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 12a19.79 19.79 0 01-3.07-8.67A2 2 0 012.77 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.59a16 16 0 006.5 6.5l1.06-1.06a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path>
-</svg>
-</div>
-<h3>Call / WhatsApp</h3>
-<p>Contact us to confirm availability and book your required gear for the shoot date.</p>
-</div>
-<div class="hiw-step">
-<div class="hiw-num">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-<rect height="14" rx="2" width="20" x="2" y="5"></rect><line x1="2" x2="22" y1="10" y2="10"></line>
-</svg>
-</div>
-<h3>Pay &amp; Collect</h3>
-<p>Pay an advance via cash or online transfer, then collect your gear and start shooting.</p>
-</div>
 </div>
 </div>
 <!-- EQUIPMENT -->
