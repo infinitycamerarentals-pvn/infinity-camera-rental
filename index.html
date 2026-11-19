@@ -56,13 +56,14 @@
       --sans:     'Inter', sans-serif;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: var(--sans);
       background: var(--white);
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     /* ── TOP BAR ── */
@@ -223,8 +224,8 @@
       margin-bottom: 2rem;
     }
     h1 .accent {
-      color: var(--black);
-      -webkit-text-stroke: 1px var(--white);
+      color: var(--brand);
+      -webkit-text-stroke: 0;
     }
     .hero-desc {
       font-size: 1rem;
@@ -1500,9 +1501,12 @@
     @media (max-width: 680px) {
       .topbar { display: none; }
       .nav-links { display: none; }
-      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: #060d1a; border-bottom: 1px solid #1e2d45; z-index: 999; padding: 1rem 0; }
-      .nav-links.open li a { padding: 0.75rem 2rem; height: auto; font-size: 0.9rem; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: #111; border-bottom: 2px solid var(--black); z-index: 999; padding: 0.5rem 0 0.75rem; }
+      .nav-links.open li a { padding: 0.75rem 1.5rem; height: auto; font-size: 0.9rem; color: #fff; }
+      .nav-call { display: list-item; }
       .nav-hamburger { display: flex; }
+      .nav-actions .btn-ghost { display: none; }
+      .btn-primary { padding: 0.45rem 0.75rem; font-size: 0.68rem; }
       .form-row { grid-template-columns: 1fr; }
       .about-values { grid-template-columns: 1fr; }
       .hero-trust { gap: 1.25rem; }
@@ -1789,10 +1793,27 @@
   display: block;
   width: 22px;
   height: 2px;
-  background: var(--white);
+  background: var(--black);
   border-radius: 2px;
   transition: all 0.3s;
 }
+.nav-call { display: none; }
+.quote-short { display: none; }
+@media (max-width: 680px) {
+  nav { padding: 0 12px; gap: 8px; }
+  .nav-logo img { height: 40px !important; }
+  .nav-hamburger { display: flex; flex-shrink: 0; margin-left: 0; }
+  .nav-actions { margin-left: auto; flex-shrink: 0; }
+  .nav-actions .btn-ghost { display: none; }
+  .nav-call { display: list-item; }
+  .btn-primary { padding: 0.5rem 0.8rem; font-size: 0.75rem; letter-spacing: 0.04em; }
+  .quote-long { display: none; }
+  .quote-short { display: inline; }
+}
+#privacy { background: #f8fafc; }
+.privacy-copy { max-width: 720px; display: flex; flex-direction: column; gap: 1rem; }
+.privacy-copy p { color: var(--muted); font-size: 0.95rem; line-height: 1.7; }
+.privacy-copy a { color: var(--black); }
 
 
 /* FX3 Combo Banner — exact flyer match */
@@ -1940,7 +1961,7 @@
 <span>📍 OU Colony, Manikonda, Hyderabad  ·  Near Bheema's Hotel</span>
 <div class="topbar-right">
 <a href="tel:+919505011266">+91 95050 11266</a>
-<a href="mailto:info@infinitycamerarental.com">info@infinitycamerarental.com</a>
+<a href="mailto:infinitycamerarentals@gmail.com">infinitycamerarentals@gmail.com</a>
 </div>
 </div>
 <!-- NAV -->
@@ -1948,7 +1969,11 @@
 <a class="nav-logo" href="#hero">
 <img alt="Infinity Camera Rental" src="logo-nav.png" style="height:48px;width:auto;" loading="lazy">
 </a>
+<button class="nav-hamburger" type="button" aria-label="Open menu" onclick="toggleMobileNav(this)">
+<span></span><span></span><span></span>
+</button>
 <ul class="nav-links">
+<li class="nav-call"><a href="tel:+919505011266">Call 95050 11266</a></li>
 <li><a href="#equipment">Equipment</a></li>
 <li><a href="#packages">Packages</a></li>
 <li><a href="#pricing">Pricing</a></li>
@@ -1958,7 +1983,7 @@
 </ul>
 <div class="nav-actions">
 <a class="btn-ghost" href="tel:+919505011266">Call Us</a>
-<a class="btn-primary" href="#booking">Request a Quote</a>
+<a class="btn-primary" href="#booking"><span class="quote-long">Request a Quote</span><span class="quote-short">Quote</span></a>
 </div>
 </nav>
 <!-- HERO -->
@@ -3155,11 +3180,11 @@
 <div class="form-row">
 <div class="form-group">
 <label for="firstName">First Name</label>
-<input id="firstName" placeholder="John" required="" type="text"/>
+<input id="firstName" placeholder="Your first name" required="" type="text"/>
 </div>
 <div class="form-group">
 <label for="lastName">Last Name</label>
-<input id="lastName" placeholder="Doe" required="" type="text"/>
+<input id="lastName" placeholder="Your last name" required="" type="text"/>
 </div>
 </div>
 <div class="form-group">
@@ -3526,7 +3551,7 @@ calcTotal();
 <div class="c-icon">✉️</div>
 <div>
 <div class="c-label">Email</div>
-<div class="c-value"><a href="mailto:info@infinitycamerarental.com">info@infinitycamerarental.com</a></div>
+<div class="c-value"><a href="mailto:infinitycamerarentals@gmail.com">infinitycamerarentals@gmail.com</a></div>
 </div>
 </div>
 </div>
@@ -3559,6 +3584,19 @@ calcTotal();
 </div>
 </div>
 </section>
+<section id="privacy">
+<div class="section-header">
+<div class="section-tag"><span>Privacy</span></div>
+<h2 class="section-title">Privacy Policy</h2>
+<p class="section-desc">How Infinity Camera Rental uses the details you share with us.</p>
+</div>
+<div class="privacy-copy">
+<p>When you send a rental request, call, or message us on WhatsApp, we use your name, phone number, email, shoot dates, and notes only to check gear availability and reply to you.</p>
+<p>We do not sell your details. We do not share them with anyone except when needed to complete your rental.</p>
+<p>This website stores one note in your browser so this cookie message stays closed after you tap Got it. We do not run advertising trackers.</p>
+<p>To ask about your details, email <a href="mailto:infinitycamerarentals@gmail.com">infinitycamerarentals@gmail.com</a> or call <a href="tel:+919505011266">+91 95050 11266</a>.</p>
+</div>
+</section>
 <!-- FOOTER -->
 <footer>
 <div class="footer-top">
@@ -3569,6 +3607,7 @@ calcTotal();
 <a href="#booking">Request Quote</a>
 <a href="#about">About</a>
 <a href="#contact">Contact</a>
+<a href="#privacy">Privacy</a>
 </div>
 </div>
 <div class="footer-bottom">
@@ -3814,7 +3853,7 @@ runCountUp(document.getElementById('stat-band'), '.stat-val[data-count]');
 </a>
 <!-- PRIVACY NOTICE -->
 <div id="privacy-bar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#111;color:#ccc;font-size:13px;padding:12px 20px;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-  <span>🍪 We use cookies to improve your experience. By continuing, you agree to our <a href="#" style="color:#f59e0b;text-decoration:none;">Privacy Policy</a>.</span>
+  <span>🍪 We use cookies to improve your experience. By continuing, you agree to our <a href="#privacy" style="color:#f59e0b;text-decoration:none;">Privacy Policy</a>.</span>
   <button onclick="document.getElementById('privacy-bar').style.display='none';localStorage.setItem('icr-privacy','1')" style="background:#f59e0b;color:#000;border:none;padding:7px 18px;border-radius:6px;font-weight:700;cursor:pointer;white-space:nowrap;">Got it</button>
 </div>
 <script>if(!localStorage.getItem('icr-privacy'))document.getElementById('privacy-bar').style.display='flex';</script>
