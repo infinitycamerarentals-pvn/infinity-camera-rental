@@ -3,347 +3,280 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Cinema look — Infinity Camera Rental</title>
+<title>Full demo — Infinity Camera Rental</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --bg: #07080b;
-    --ink: #f6f3ec;
-    --muted: #b7b1a6;
-    --gold: #f5a500;
-    --line: rgba(255,255,255,0.1);
+  :root { --bg:#07080b; --ink:#f6f3ec; --muted:#b7b1a6; --gold:#f5a500; --line:rgba(255,255,255,.1); --card:#101218; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:Outfit,sans-serif; }
+  a { color:inherit; text-decoration:none; }
+  img { max-width:100%; display:block; }
+  .note { background:var(--gold); color:#1a1200; text-align:center; font-size:13px; font-weight:600; padding:10px 16px; }
+  nav { position:sticky; top:0; z-index:30; display:flex; align-items:center; gap:18px; padding:12px 22px; background:rgba(7,8,11,.9); backdrop-filter:blur(16px); border-bottom:1px solid var(--line); }
+  .logo { height:36px; width:auto; }
+  .links { display:flex; gap:16px; color:var(--muted); font-size:14px; }
+  .links a:hover { color:#fff; }
+  .nav-cta { margin-left:auto; background:var(--gold); color:#1a1200; font-weight:600; font-size:14px; padding:10px 16px; border-radius:999px; }
+  .burger { display:none; margin-left:auto; width:42px; height:42px; border-radius:12px; border:1px solid var(--line); background:transparent; color:#fff; }
+  .hero { display:grid; grid-template-columns:1.05fr .95fr; gap:36px; align-items:center; padding:42px 28px 12px; max-width:1240px; margin:0 auto; }
+  .kicker { display:inline-flex; align-items:center; gap:8px; color:var(--gold); letter-spacing:.18em; text-transform:uppercase; font-size:12px; font-weight:600; }
+  .kicker i { width:7px; height:7px; border-radius:50%; background:var(--gold); display:inline-block; }
+  h1 { font-family:Sora,sans-serif; font-weight:600; font-size:clamp(44px,6vw,76px); line-height:.96; letter-spacing:-.045em; margin:14px 0 0; }
+  h1 span { color:var(--gold); }
+  .lede { max-width:480px; color:var(--muted); font-weight:300; font-size:18px; line-height:1.55; margin:18px 0 0; }
+  .actions { display:flex; gap:12px; margin-top:24px; flex-wrap:wrap; }
+  .btn { display:inline-flex; align-items:center; gap:8px; padding:13px 18px; border-radius:999px; font-weight:600; border:0; cursor:pointer; font-family:inherit; font-size:15px; }
+  .btn-gold { background:var(--gold); color:#1a1200; }
+  .btn-line { border:1px solid rgba(255,255,255,.28); color:#fff; background:transparent; }
+  .facts { display:flex; gap:28px; margin-top:28px; padding-top:18px; border-top:1px solid var(--line); }
+  .facts b { display:block; font-family:Sora,sans-serif; font-size:20px; }
+  .facts span { color:var(--muted); font-size:13px; }
+  .stage { position:relative; border-radius:28px; min-height:520px; background:radial-gradient(ellipse at 50% 42%, rgba(245,165,0,.22), transparent 55%), linear-gradient(180deg,#1c1f27,#0c0d11); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .stage img { width:92%; height:470px; object-fit:contain; }
+  .chip { position:absolute; left:16px; bottom:16px; background:rgba(10,10,12,.72); border:1px solid rgba(255,255,255,.14); backdrop-filter:blur(10px); border-radius:16px; padding:12px 14px; }
+  .chip small { color:var(--gold); letter-spacing:.14em; text-transform:uppercase; font-size:11px; }
+  .chip strong { display:block; margin-top:2px; }
+  .wrap { max-width:1240px; margin:0 auto; padding:8px 28px 56px; }
+  .head { display:flex; justify-content:space-between; align-items:end; gap:16px; margin:34px 0 14px; scroll-margin-top:84px; }
+  .head h2 { font-family:Sora,sans-serif; font-size:32px; margin:0; letter-spacing:-.03em; }
+  .head p { margin:0; color:var(--muted); }
+  .shelf { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:22px; overflow:hidden; display:flex; flex-direction:column; }
+  .shot { height:210px; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 50% 42%, #3a3e49, #101218 72%); }
+  .shot img { width:100%; height:100%; object-fit:contain; }
+  .shot img.cut { mix-blend-mode:multiply; }
+  .meta { padding:14px 16px 16px; }
+  .cat { color:var(--gold); font-size:11px; letter-spacing:.16em; text-transform:uppercase; }
+  .meta h3 { margin:6px 0 0; font-size:17px; font-weight:500; }
+  .price { margin-top:8px; color:var(--muted); font-size:14px; }
+  .price b { color:var(--ink); }
+  .tools { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+  .tools input { flex:1; min-width:180px; background:#14161c; border:1px solid var(--line); color:#fff; border-radius:999px; padding:12px 16px; font:inherit; }
+  .chips { display:flex; gap:8px; overflow:auto; padding-bottom:4px; }
+  .chips button { border:1px solid var(--line); background:transparent; color:#ddd; border-radius:999px; padding:8px 12px; font:inherit; font-size:13px; white-space:nowrap; cursor:pointer; }
+  .chips button.on { background:var(--gold); color:#1a1200; border-color:var(--gold); font-weight:600; }
+  #grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  #grid .shot { background:#efece6; }
+  #grid .shot img { object-fit:contain; padding:12px; }
+  .ask { margin-top:12px; display:inline-flex; color:#1a1200; background:var(--gold); border-radius:999px; padding:8px 12px; font-size:13px; font-weight:600; }
+  .empty { color:var(--muted); padding:28px 0; }
+  .feature { margin-top:16px; display:grid; grid-template-columns:1.2fr .8fr; background:var(--card); border:1px solid var(--line); border-radius:28px; overflow:hidden; }
+  .feature .shot { height:380px; }
+  .feature .copy { padding:32px 26px; display:flex; flex-direction:column; justify-content:center; }
+  .feature h2 { font-family:Sora,sans-serif; font-size:clamp(30px,4vw,46px); line-height:1; letter-spacing:-.04em; margin:8px 0; }
+  .pkgs { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .pkg { background:var(--card); border:1px solid var(--line); border-radius:22px; padding:22px; }
+  .pkg .cat { margin-bottom:8px; }
+  .pkg h3 { font-family:Sora,sans-serif; margin:0 0 12px; font-size:26px; letter-spacing:-.03em; }
+  .pkg ul { margin:0; padding-left:18px; color:var(--muted); line-height:1.7; }
+  .pkg .rate { margin:16px 0; font-family:Sora,sans-serif; font-size:28px; }
+  .pkg .rate span { font-size:14px; color:var(--muted); font-family:Outfit,sans-serif; }
+  .faq details { border-top:1px solid var(--line); padding:14px 0; }
+  .faq summary { cursor:pointer; font-size:17px; }
+  .faq p { color:var(--muted); margin:8px 0 0; line-height:1.55; }
+  .split { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  form { display:grid; gap:12px; }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  label { display:grid; gap:6px; font-size:13px; color:var(--muted); }
+  input, select, textarea { background:#14161c; border:1px solid var(--line); color:#fff; border-radius:12px; padding:12px; font:inherit; }
+  textarea { min-height:90px; resize:vertical; }
+  .visit { display:grid; grid-template-columns:.8fr 1.2fr; gap:14px; }
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:22px; padding:22px; }
+  iframe { width:100%; height:360px; border:0; border-radius:18px; }
+  footer { border-top:1px solid var(--line); padding:22px 28px 40px; color:var(--muted); max-width:1240px; margin:0 auto; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+  footer b { color:#fff; }
+  @media (max-width:980px) {
+    .hero,.feature,.shelf,#grid,.pkgs,.visit,.split { grid-template-columns:1fr 1fr; }
+    .feature,.visit,.split { grid-template-columns:1fr; }
+    .links { display:none; }
+    .burger { display:inline-flex; align-items:center; justify-content:center; }
+    nav.open .links { display:flex; flex-direction:column; position:absolute; top:64px; left:0; right:0; background:#0c0d11; padding:16px 20px 20px; border-bottom:1px solid var(--line); }
+    .nav-cta { margin-left:0; }
   }
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: Outfit, sans-serif;
-  }
-  a { color: inherit; text-decoration: none; }
-  img { max-width: 100%; display: block; }
-  .note {
-    background: var(--gold);
-    color: #1a1200;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 10px 16px;
-  }
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    padding: 14px 28px;
-    background: rgba(7,8,11,0.82);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--line);
-  }
-  .logo { height: 36px; width: auto; }
-  nav .links { display: flex; gap: 18px; margin-left: 8px; color: var(--muted); font-size: 14px; }
-  .nav-cta {
-    margin-left: auto;
-    background: var(--gold);
-    color: #1a1200;
-    font-weight: 600;
-    font-size: 14px;
-    padding: 10px 16px;
-    border-radius: 999px;
-  }
-  .hero {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 36px;
-    align-items: center;
-    padding: 48px 28px 28px;
-    max-width: 1240px;
-    margin: 0 auto;
-  }
-  .kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--gold);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 600;
-  }
-  .kicker i {
-    width: 7px; height: 7px; border-radius: 50%; background: var(--gold); display: inline-block;
-  }
-  h1 {
-    font-family: Sora, sans-serif;
-    font-weight: 600;
-    font-size: clamp(44px, 6vw, 78px);
-    line-height: 0.96;
-    letter-spacing: -0.045em;
-    margin: 16px 0 0;
-  }
-  h1 span { color: var(--gold); }
-  .lede {
-    max-width: 460px;
-    color: var(--muted);
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 1.55;
-    margin: 22px 0 0;
-  }
-  .actions { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 20px;
-    border-radius: 999px;
-    font-weight: 600;
-  }
-  .btn-gold { background: var(--gold); color: #1a1200; }
-  .btn-line { border: 1px solid rgba(255,255,255,0.28); color: #fff; }
-  .facts { display: flex; gap: 28px; margin-top: 36px; padding-top: 22px; border-top: 1px solid var(--line); }
-  .facts b { display: block; font-family: Sora, sans-serif; font-size: 20px; font-weight: 600; }
-  .facts span { color: var(--muted); font-size: 13px; }
-  .stage {
-    position: relative;
-    border-radius: 28px;
-    min-height: 560px;
-    background:
-      radial-gradient(ellipse at 50% 42%, rgba(245,165,0,0.22), transparent 55%),
-      linear-gradient(180deg, #1c1f27, #0c0d11);
-    border: 1px solid var(--line);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .stage img { width: 92%; height: 500px; object-fit: contain; filter: drop-shadow(0 30px 40px rgba(0,0,0,0.45)); }
-  .chip {
-    position: absolute;
-    left: 18px;
-    bottom: 18px;
-    background: rgba(10,10,12,0.72);
-    border: 1px solid rgba(255,255,255,0.14);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    padding: 12px 14px;
-  }
-  .chip small { color: var(--gold); letter-spacing: 0.14em; text-transform: uppercase; font-size: 11px; }
-  .chip strong { display: block; margin-top: 2px; font-size: 16px; }
-  .wrap { max-width: 1240px; margin: 0 auto; padding: 18px 28px 64px; }
-  .head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin: 28px 0 16px; }
-  .head h2 { font-family: Sora, sans-serif; font-size: 28px; margin: 0; letter-spacing: -0.03em; }
-  .head p { margin: 0; color: var(--muted); }
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-  }
-  .card {
-    background: #101218;
-    border: 1px solid var(--line);
-    border-radius: 22px;
-    overflow: hidden;
-  }
-  .shot {
-    height: 240px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle at 50% 42%, #3a3e49, #101218 72%);
-  }
-  .shot img { width: 88%; height: 86%; object-fit: contain; }
-  .shot img.cut { mix-blend-mode: multiply; width: 100%; height: 100%; }
-  .meta { padding: 14px 16px 16px; }
-  .meta .cat { color: var(--gold); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; }
-  .meta h3 { margin: 6px 0 0; font-size: 18px; font-weight: 500; }
-  .meta .price { margin-top: 8px; color: var(--muted); font-size: 14px; }
-  .meta .price b { color: var(--ink); font-weight: 600; }
-  .feature {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: 1.25fr 0.75fr;
-    gap: 14px;
-    background: #101218;
-    border: 1px solid var(--line);
-    border-radius: 28px;
-    overflow: hidden;
-  }
-  .feature .shot { height: 420px; background: radial-gradient(circle at 50% 45%, #2c3038, #0c0e13 70%); }
-  .feature .copy { padding: 36px 28px; display: flex; flex-direction: column; justify-content: center; }
-  .feature h2 { font-family: Sora, sans-serif; font-size: clamp(32px, 4vw, 48px); line-height: 1; letter-spacing: -0.04em; margin: 10px 0 0; }
-  .feature p { color: var(--muted); line-height: 1.6; }
-  .cats { display: grid; grid-template-columns: 1.4fr 1fr 1fr; grid-template-rows: 220px 220px; gap: 14px; }
-  .tile {
-    position: relative;
-    border-radius: 22px;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    background: #15171d center/cover no-repeat;
-  }
-  .tile.wide { grid-row: 1 / span 2; }
-  .tile::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.78), rgba(0,0,0,0.05) 55%);
-  }
-  .tile span {
-    position: absolute;
-    left: 16px;
-    bottom: 14px;
-    z-index: 1;
-    font-family: Sora, sans-serif;
-    font-size: 22px;
-  }
-  .tile small { display: block; font-family: Outfit, sans-serif; font-size: 13px; color: var(--gold); letter-spacing: 0.08em; }
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 28px;
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-    color: var(--muted);
-    max-width: 1240px;
-    margin: 0 auto;
-  }
-  footer b { color: var(--ink); }
-  @media (max-width: 980px) {
-    .hero, .feature, .grid, .cats { grid-template-columns: 1fr 1fr; }
-    .cats { grid-template-rows: none; }
-    .tile.wide { grid-row: auto; min-height: 240px; }
-    .stage, .feature .shot { min-height: 380px; height: 380px; }
-    nav .links { display: none; }
-  }
-  @media (max-width: 680px) {
-    .hero, .feature, .grid, .cats { grid-template-columns: 1fr; }
-    .facts { flex-wrap: wrap; }
-    nav { padding: 12px 16px; }
-    .hero, .wrap, footer { padding-left: 16px; padding-right: 16px; }
+  @media (max-width:680px) {
+    .hero,.shelf,#grid,.pkgs { grid-template-columns:1fr; }
+    .row2 { grid-template-columns:1fr; }
+    .hero,.wrap,footer { padding-left:16px; padding-right:16px; }
+    .stage,.feature .shot { min-height:320px; height:320px; }
   }
 </style>
 </head>
 <body>
-<div class="note">New look preview. Homepage is still the old one. Refresh this page if you still see text-only themes.</div>
-<nav>
-  <img class="logo" src="logo-nav.png" alt="Infinity Camera Rental"/>
+<div class="note">Full demo of the cinema look. The live homepage is still the old site. Scroll this page.</div>
+<nav id="nav">
+  <a href="#top"><img class="logo" src="logo-nav.png" alt="Infinity Camera Rental"/></a>
   <div class="links">
-    <a href="#shelf">Cameras</a>
-    <a href="#shelf">Lenses</a>
-    <a href="#shelf">Lights</a>
-    <a href="#shelf">Gimbals</a>
+    <a href="#shelf">Shelf</a>
+    <a href="#catalog">Catalog</a>
+    <a href="#packages">Packages</a>
+    <a href="#quote">Quote</a>
+    <a href="#visit">Visit</a>
   </div>
   <a class="nav-cta" href="https://wa.me/919505011266">WhatsApp</a>
+  <button class="burger" type="button" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
 </nav>
 
-<section class="hero">
+<section class="hero" id="top">
   <div>
     <div class="kicker"><i></i> Hyderabad · Manikonda</div>
     <h1>Cinema gear,<br/><span>ready today.</span></h1>
-    <p class="lede">Sony FX5, FX3, GM primes, DZOFilm, lights and gimbals. Tested, packed, and collected from OU Colony.</p>
+    <p class="lede">Sony FX5, FX3, GM primes, DZOFilm, lights, gimbals and drones. Tested, packed, and collected from OU Colony. 56 items on this page.</p>
     <div class="actions">
-      <a class="btn btn-gold" href="https://wa.me/919505011266">Book on WhatsApp</a>
-      <a class="btn btn-line" href="#shelf">See the shelf</a>
+      <a class="btn btn-gold" href="#catalog">Browse the catalog</a>
+      <a class="btn btn-line" href="#quote">Request a quote</a>
     </div>
     <div class="facts">
       <div><b>24/7</b><span>Pickup</span></div>
       <div><b>₹800</b><span>Days start here</span></div>
-      <div><b>500104</b><span>OU Colony</span></div>
+      <div><b>30 min</b><span>WhatsApp reply</span></div>
     </div>
   </div>
   <div class="stage">
     <img src="hero-bg.jpg" alt="Cinema camera rig"/>
-    <div class="chip">
-      <small>House body</small>
-      <strong>Rigged cinema camera</strong>
-    </div>
+    <div class="chip"><small>House body</small><strong>Rigged cinema camera</strong></div>
   </div>
 </section>
 
-<div class="wrap" id="shelf">
-  <div class="head">
+<div class="wrap">
+  <div class="head" id="shelf">
     <h2>On the shelf</h2>
-    <p>Same gear. Shown like a rental house, not a spreadsheet.</p>
+    <p>The pieces most crews ask for first.</p>
   </div>
-  <div class="grid">
-    <article class="card">
-      <div class="shot"><img class="cut" src="sony-fx5.jpg" alt="Sony FX5"/></div>
-      <div class="meta">
-        <div class="cat">Camera</div>
-        <h3>Sony FX5</h3>
-        <div class="price"><b>₹5,000</b> / day</div>
-      </div>
-    </article>
-    <article class="card">
-      <div class="shot"><img src="fx3-nobg.png" alt="Sony FX3"/></div>
-      <div class="meta">
-        <div class="cat">Camera</div>
-        <h3>Sony FX3</h3>
-        <div class="price"><b>₹2,500</b> / day</div>
-      </div>
-    </article>
-    <article class="card">
-      <div class="shot"><img class="cut" src="3%20lens.jpg" alt="Sony GM primes"/></div>
-      <div class="meta">
-        <div class="cat">Lenses</div>
-        <h3>GM primes</h3>
-        <div class="price"><b>35 · 50 · 85</b></div>
-      </div>
-    </article>
-    <article class="card">
-      <div class="shot"><img class="cut" src="0057613_dji-rs-4-pro-combo-gimbal-stabilizer-dji-rs4-pro-combo_500.png" alt="DJI RS 4 Pro"/></div>
-      <div class="meta">
-        <div class="cat">Motion</div>
-        <h3>DJI RS 4 Pro</h3>
-        <div class="price"><b>Gimbal</b> combo</div>
-      </div>
-    </article>
+  <div class="shelf">
+    <article class="card"><div class="shot"><img class="cut" src="sony-fx5.jpg" alt="Sony FX5"/></div><div class="meta"><div class="cat">Camera</div><h3>Sony FX5</h3><div class="price"><b>₹5,000</b> / day</div></div></article>
+    <article class="card"><div class="shot"><img src="fx3-nobg.png" alt="Sony FX3"/></div><div class="meta"><div class="cat">Camera</div><h3>Sony FX3</h3><div class="price"><b>₹2,500</b> / day</div></div></article>
+    <article class="card"><div class="shot"><img class="cut" src="3%20lens.jpg" alt="GM primes"/></div><div class="meta"><div class="cat">Lenses</div><h3>GM primes</h3><div class="price"><b>35 · 50 · 85</b></div></div></article>
+    <article class="card"><div class="shot"><img class="cut" src="0057613_dji-rs-4-pro-combo-gimbal-stabilizer-dji-rs4-pro-combo_500.png" alt="DJI RS 4 Pro"/></div><div class="meta"><div class="cat">Motion</div><h3>DJI RS 4 Pro</h3><div class="price"><b>Gimbal</b> combo</div></div></article>
   </div>
 
   <section class="feature">
-    <div class="shot"><img class="cut" src="dzofilm-arles.jpg" alt="DZOFilm Arles prime kit"/></div>
+    <div class="shot"><img class="cut" src="dzofilm-arles.jpg" alt="DZOFilm Arles"/></div>
     <div class="copy">
       <div class="kicker"><i></i> Lens kit</div>
       <h2>Arles T1.4, five primes.</h2>
-      <p>25, 35, 50, 75 and 100. Matched cine glass for narrative and commercials.</p>
-      <div class="price" style="color:#f6f3ec;font-size:22px;font-family:Sora,sans-serif;">₹5,000 <span style="color:#b7b1a6;font-size:14px;font-family:Outfit,sans-serif;">/ day</span></div>
-      <div class="actions">
-        <a class="btn btn-gold" href="https://wa.me/919505011266?text=Hi%2C%20I%20want%20the%20DZOFilm%20Arles%20kit.">Ask for this kit</a>
-      </div>
+      <p class="lede">25, 35, 50, 75 and 100. Matched cine glass for narrative and commercials.</p>
+      <div class="price" style="font-family:Sora,sans-serif;font-size:28px;color:#fff;">₹5,000 <span style="font-size:14px;color:#b7b1a6;">/ day</span></div>
+      <div class="actions"><a class="btn btn-gold" href="https://wa.me/919505011266?text=Hi%2C%20I%20want%20the%20DZOFilm%20Arles%20kit.">Ask for this kit</a></div>
     </div>
   </section>
 
-  <div class="head">
-    <h2>The floor</h2>
-    <p>Cameras, light, and the studio wall.</p>
+  <div class="head" id="catalog">
+    <h2>Full catalog</h2>
+    <p id="count"></p>
   </div>
-  <div class="cats">
-    <div class="tile wide" style="background-image:linear-gradient(to top, rgba(0,0,0,.2), rgba(0,0,0,.05)), url('backdrops.jpg'); background-size:cover;">
-      <span>Backdrops<small>Paper &amp; stand</small></span>
+  <div class="tools">
+    <input id="q" type="search" placeholder="Search FX3, gimbal, Nanlite…" />
+  </div>
+  <div class="chips" id="chips">
+    <button type="button" data-cat="all" class="on">All</button>
+    <button type="button" data-cat="cameras">Cameras</button><button type="button" data-cat="cinema-line-cameras">Cinema</button><button type="button" data-cat="action-cams">Action</button><button type="button" data-cat="vlogging-cams">Vlogging</button><button type="button" data-cat="lenses">Lenses</button><button type="button" data-cat="cine-lenses">Cine lenses</button><button type="button" data-cat="video-lights">Video lights</button><button type="button" data-cat="photo-lights">Photo lights</button><button type="button" data-cat="gimbals">Gimbals</button><button type="button" data-cat="backdrops">Backdrops</button><button type="button" data-cat="accessories">Accessories</button><button type="button" data-cat="audio">Audio</button><button type="button" data-cat="drones">Drones</button>
+  </div>
+  <div id="grid"></div>
+
+  <div class="head" id="packages"><h2>Packages</h2><p>One message books the whole kit.</p></div>
+  <div class="pkgs">
+    <article class="pkg">
+      <div class="cat">Wedding</div>
+      <h3>Wedding Film Kit</h3>
+      <ul><li>Sony A7S III</li><li>16-35, 50 and 85mm GM</li><li>DJI RS 4 Pro</li></ul>
+      <div class="rate">₹5,999 <span>/ day</span></div>
+      <a class="btn btn-gold" href="https://wa.me/919505011266?text=Hi%2C%20I%20want%20the%20Wedding%20Film%20Kit.">Enquire</a>
+    </article>
+    <article class="pkg">
+      <div class="cat">Creator</div>
+      <h3>Creator Studio Kit</h3>
+      <ul><li>4K mirrorless body</li><li>24-70mm, wireless mic</li><li>Nanlite, Godox, gimbal, tripod</li></ul>
+      <div class="rate">₹5,999 <span>/ day</span></div>
+      <a class="btn btn-gold" href="https://wa.me/919505011266?text=Hi%2C%20I%20want%20the%20Creator%20Studio%20Kit.">Enquire</a>
+    </article>
+    <article class="pkg">
+      <div class="cat">Corporate</div>
+      <h3>Coverage Kit</h3>
+      <ul><li>Sony FX3 and 24-70mm</li><li>85mm GM, RS 4 Pro</li><li>Two Nanlites, DJI Mic 2, Atomos</li></ul>
+      <div class="rate">₹8,999 <span>/ day</span></div>
+      <a class="btn btn-gold" href="https://wa.me/919505011266?text=Hi%2C%20I%20want%20the%20Corporate%20Coverage%20Kit.">Enquire</a>
+    </article>
+  </div>
+
+  <div class="head" id="faq"><h2>Before you book</h2><p>The questions crews ask first.</p></div>
+  <div class="faq">
+    <details open><summary>What ID is required for pickup?</summary><p>A government photo ID: Aadhaar, PAN, passport, or driving licence. Company rentals can use a GST certificate or letterhead.</p></details>
+    <details><summary>Is there a security deposit?</summary><p>Yes. A refundable deposit is taken at pickup, usually 50–100% of the gear value, and returned when the kit comes back in the same condition.</p></details>
+    <details><summary>Do you deliver in Hyderabad?</summary><p>Yes. Delivery is arranged on WhatsApp. Same-day pickup is available at the Manikonda office.</p></details>
+    <details><summary>How do I pay?</summary><p>UPI, bank transfer, or cash, collected at pickup along with the deposit.</p></details>
+  </div>
+
+  <div class="head" id="quote"><h2>Request a quote</h2><p>This opens WhatsApp with your details filled in.</p></div>
+  <div class="split">
+    <div class="panel">
+      <h3 style="margin-top:0;font-family:Sora,sans-serif;">Same-day is possible.</h3>
+      <p class="lede">Call <a href="tel:+919505011266">95050 11266</a> or <a href="tel:+917993253489">79932 53489</a>. Gear is cleaned and checked before every pickup.</p>
     </div>
-    <div class="tile" style="background:#eceae4;">
-      <img src="Godox%20Lc%20500%20C.png" alt="Godox light" style="width:100%;height:100%;object-fit:contain;padding:10px;"/>
-      <span>Lights<small>Godox &amp; Nanlite</small></span>
+    <form class="panel" id="quoteForm">
+      <div class="row2">
+        <label>Name<input name="name" required placeholder="Your name"/></label>
+        <label>Phone<input name="phone" required placeholder="10-digit mobile"/></label>
+      </div>
+      <div class="row2">
+        <label>Start<input name="start" type="date" required/></label>
+        <label>End<input name="end" type="date" required/></label>
+      </div>
+      <label>Gear<select name="gear"><option>Cinema camera package</option><option>Mirrorless camera</option><option>Lens kit</option><option>Lights</option><option>Gimbal</option><option>Full production package</option></select></label>
+      <label>Notes<textarea name="notes" placeholder="Shoot, location, anything else"></textarea></label>
+      <button class="btn btn-gold" type="submit">Send on WhatsApp</button>
+    </form>
+  </div>
+
+  <div class="head" id="visit"><h2>The office</h2><p>Open all day. Collect from the first floor.</p></div>
+  <div class="visit">
+    <div class="panel">
+      <div class="cat">Manikonda</div>
+      <h3 style="font-family:Sora,sans-serif;margin:8px 0;">Flat No. 498, 1st Floor</h3>
+      <p class="lede">Manikonda Road, near Bheema’s Hotel, OU Colony, Shaikpet, Hyderabad 500104.</p>
+      <p><b>95050 11266</b><br/>infinitycamerarentals@gmail.com</p>
+      <a class="btn btn-line" href="https://maps.app.goo.gl/yGETFMUS4hAiuGiLA" target="_blank">Get directions</a>
     </div>
-    <div class="tile" style="background-image:url('sony-fx5.jpg'); background-size:cover; background-position:center;">
-      <span>Cameras<small>FX5 · FX3 · Alpha</small></span>
-    </div>
-    <div class="tile" style="background:#15171d;">
-      <img src="dzofilm-arcana.jpg" alt="DZOFilm Arcana" style="width:100%;height:100%;object-fit:contain;"/>
-      <span>Glass<small>Cine &amp; GM</small></span>
-    </div>
+    <iframe title="Infinity Camera Rental" src="https://maps.google.com/maps?q=17.404818,78.391019&z=17&output=embed"></iframe>
   </div>
 </div>
-
 <footer>
-  <div><b>Infinity Camera Rental</b><br/>Flat 498, Manikonda Road, near Bheema’s Hotel, OU Colony, Hyderabad 500104</div>
-  <div><b>95050 11266</b><br/>infinitycamerarentals@gmail.com</div>
+  <div><b>Infinity Camera Rental</b><br/>Hyderabad · Since 2020</div>
+  <div>This is a design demo. Prices match the current site.</div>
 </footer>
+<script>
+const GEAR = [{"cat":"cameras","label":"Cameras","name":"Sony A7S III","price":"₹2,000 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-A7S3.jpg"},{"cat":"cameras","label":"Cameras","name":"Sony A7M5","price":"₹2,500 / day","src":"https://wildclickz.com/wp-content/uploads/2026/05/Sony-A7-V.jpg"},{"cat":"cameras","label":"Cameras","name":"Sony A7M4","price":"₹2,000 / day","src":"https://wildclickz.com/wp-content/uploads/2024/06/ChatGPT-Image-May-20-2026-12_12_55-PM-768x768.png"},{"cat":"cameras","label":"Cameras","name":"Sony A7M3","price":"₹1,500 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=500,quality=95/https://www.bhphotovideo.com/images/images500x500/sony_ilce_7m3_alpha_a7_iii_mirrorless_1519677934_1394217.jpg"},{"cat":"cameras","label":"Cameras","name":"Canon EOS R6 Mark II","price":"₹2,000 / day","src":"https://wildclickz.com/wp-content/uploads/2026/05/Canon-EOS-R6-Mark-III.jpg"},{"cat":"cameras","label":"Cameras","name":"Sony FX30","price":"₹1,500 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=400,quality=95/https://www.bhphotovideo.com/images/fb/sony_ilme_fx30_fx30_digital_cinema_camera_1729317.jpg"},{"cat":"cameras","label":"Cameras","name":"Sony A7R V","price":"₹3,000 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=400,quality=95/https://www.bhphotovideo.com/images/fb/sony_ilce_7rm5_b_a7r_v_mirrorless_camera_1731389.jpg"},{"cat":"cinema-line-cameras","label":"Cinema","name":"Sony FX3","price":"₹2,500 / day","src":"fx3-nobg.png"},{"cat":"cinema-line-cameras","label":"Cinema","name":"Sony FX5","price":"₹5,000 / day","src":"sony-fx5.jpg"},{"cat":"action-cams","label":"Action","name":"GoPro HERO 13 Black","price":"₹1,500 / day","src":"https://wildclickz.com/wp-content/uploads/2026/05/GoPro-HERO13-Black.jpg"},{"cat":"action-cams","label":"Action","name":"Insta360 X5","price":"₹2,000 / day","src":"https://wildclickz.com/wp-content/uploads/2026/05/Insta360-X5-360%C2%B0-8K-Camera.jpg"},{"cat":"vlogging-cams","label":"Vlogging","name":"DJI Osmo Pocket 3 Creator Combo","price":"₹1,000 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=500,quality=95/https://www.bhphotovideo.com/images/images500x500/dji_cp_os_00000302_01_dji_osmo_pocket_3_creator_1695643985_1788804.jpg"},{"cat":"vlogging-cams","label":"Vlogging","name":"DJI Osmo Pocket 4 Creator Combo","price":"₹1,500 / day","src":"https://cdn.cvp.com/images/products/altimage/13-04-20261776086769cp.os.00000544.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 14mm f/1.4 GM","price":"₹1,000 / day","src":"https://wildclickz.com/wp-content/uploads/2026/05/Sony-FE-14mm.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 24mm f/1.4 GM","price":"₹1,000 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-FE-24mm.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 35mm f/1.4 GM","price":"₹1,000 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-FE-35mm.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 50mm f/1.4 GM","price":"₹1,000 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-FE-50mm.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 85mm f/1.4 GM","price":"₹1,000 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-FE-85mm-GM.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 135mm f/1.4 GM","price":"₹1,000 / day","src":"https://www.sony.co.in/image/4e205039995bdcf75393ee741b2118ef?fmt=png-alpha&wid=500"},{"cat":"lenses","label":"Lenses","name":"Sony 16-35mm f/2.8 GM","price":"₹1,000 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-FE-16-35mm-GM-1.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 16-35mm f/2.8 GM II","price":"₹1,500 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-FE-16-35mm-GM-1.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 24-70mm f/2.8 GM","price":"₹1,000 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-FE-24-70mm-GM-1.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 24-70mm f/2.8 GM II","price":"₹1,500 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-FE-24-70mm-GM-1.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 70-200mm f/2.8 GM","price":"₹1,000 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-FE-70-200mm-1.jpg"},{"cat":"lenses","label":"Lenses","name":"Sony 70-200mm f/2.8 GM II","price":"₹1,500 / day","src":"https://wildclickz.com/wp-content/uploads/2024/05/Sony-FE-70-200mm-1.jpg"},{"cat":"lenses","label":"Lenses","name":"Sigma 35mm f/1.4 DG DN Art","price":"₹800 / day","src":"https://www.sigma-global.com/lenses/a021_35_14_product_img01.png"},{"cat":"lenses","label":"Lenses","name":"Sigma 50mm f/1.4 DG DN Art","price":"₹800 / day","src":"https://www.sigma-global.com/lenses/a023_50_14_product_img01.png"},{"cat":"lenses","label":"Lenses","name":"Sigma 85mm f/1.4 DG DN Art","price":"₹800 / day","src":"https://www.sigma-global.com/lenses/a020_85_14_product_img01.png"},{"cat":"lenses","label":"Lenses","name":"Sony 90mm f/2.8 Macro G","price":"₹1,000 / day","src":"https://www.sony.co.in/image/0a3782cc9e472530e4fded48aeebb180?fmt=png-alpha&wid=500"},{"cat":"cine-lenses","label":"Cine lenses","name":"DZOFilm Arles Prime Lens Kit","price":"₹5,000 / day","src":"dzofilm-arles.jpg"},{"cat":"cine-lenses","label":"Cine lenses","name":"DZOFilm Arcana Lens Kit","price":"₹4,000 / day","src":"dzofilm-arcana.jpg"},{"cat":"video-lights","label":"Video lights","name":"Nanlite FC-720B","price":"₹2,000 / day","src":"https://nanliteus.com/cdn/shop/files/Nanlite-FC-720B-2.jpg?v=1770097474"},{"cat":"video-lights","label":"Video lights","name":"Nanlite FC-720C","price":"₹2,000 / day","src":"https://nanliteus.com/cdn/shop/files/Nanlite-FC-720C-9.jpg?v=1770094822"},{"cat":"video-lights","label":"Video lights","name":"Nanlite FS-300B","price":"₹1,000 / day","src":"https://nanliteus.com/cdn/shop/files/fs-300b-main.jpg?v=1758655659"},{"cat":"video-lights","label":"Video lights","name":"Nanlite FS-300C","price":"₹1,500 / day","src":"https://nanliteus.com/cdn/shop/files/FS-300C_4.jpg?v=1758649383"},{"cat":"video-lights","label":"Video lights","name":"Nanlite PavoTube II 15C","price":"₹1,500 / day","src":"https://nanliteus.com/cdn/shop/files/c15-sq-7.jpg?v=1759935688"},{"cat":"video-lights","label":"Video lights","name":"Nanlite PavoTube II 30C","price":"₹1,500 / day","src":"https://nanliteus.com/cdn/shop/files/PavoTube_II_30C_LED_Tube_Light.jpg?v=1756070467"},{"cat":"video-lights","label":"Video lights","name":"Godox LC500R","price":"₹500 / day","src":"https://venkru.com/wp-content/uploads/2023/10/01-1-700x700.jpg"},{"cat":"photo-lights","label":"Photo lights","name":"Godox AD600 Pro Mark II","price":"₹1,300 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=400,quality=95/https://www.bhphotovideo.com/images/fb/godox_ad600proii_all_in_one_outdoor_flash_1836274.jpg"},{"cat":"photo-lights","label":"Photo lights","name":"Godox AD400 Pro","price":"₹1,000 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=400,quality=95/https://www.bhphotovideo.com/images/fb/godox_ad400proii_ad400pro_ii_all_in_one_outdoor_1902867.jpg"},{"cat":"photo-lights","label":"Photo lights","name":"Godox V1S Flash","price":"₹500 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=400,quality=95/https://www.bhphotovideo.com/images/fb/godox_v1_s_v1_flash_for_sony_1466057.jpg"},{"cat":"gimbals","label":"Gimbals","name":"DJI RS 4","price":"₹800 / day","src":"https://se-cdn.djiits.com/tpc/uploads/spu/cover/f369dd11b8af89e1e2c80b990280323b@ultra.png"},{"cat":"gimbals","label":"Gimbals","name":"DJI RS5 Combo","price":"₹1,000 / day","src":"https://www-cdn.djiits.com/cms/uploads/02292f279b97ceed1a8c97bda26b0d63@374*374.png"},{"cat":"gimbals","label":"Gimbals","name":"DJI RS 3 Pro","price":"₹1,200 / day","src":"https://se-cdn.djiits.com/tpc/uploads/spu/cover/a9285537fe0f4ce6a90eedd86ef66fd2@ultra.png"},{"cat":"gimbals","label":"Gimbals","name":"DJI RS4 Pro","price":"₹1,500 / day","src":"https://se-cdn.djiits.com/tpc/uploads/spu/cover/5924fa618ac9f4e60e2e459f119a0daa@ultra.png"},{"cat":"backdrops","label":"Backdrops","name":"Premium Paper Backdrops","price":"₹3,000 / roll","src":"backdrops.jpg"},{"cat":"backdrops","label":"Backdrops","name":"Backdrop Stand Setup","price":"Included in ₹3,000","src":"backdrop-stand.jpg"},{"cat":"accessories","label":"Accessories","name":"Atomos Shogun","price":"₹1,200 / day","src":"https://www.atomos.com/wp-content/uploads/2026/02/DTC-PRODUCT-GRID-SHOGUN-ULTRA_2026-FEB.png"},{"cat":"accessories","label":"Accessories","name":"Atomos Ninja","price":"₹1,000 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=400,quality=95/https://www.bhphotovideo.com/images/fb/atomos_atomnjau01_ninja_ultra_5_recording_1779414.jpg"},{"cat":"accessories","label":"Accessories","name":"E-Image EK-730","price":"₹500 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=400,quality=95/https://www.bhphotovideo.com/images/fb/e_image_ek630_professional_camera_video_tripod_1473481.jpg"},{"cat":"accessories","label":"Accessories","name":"19\" Teleprompter","price":"₹6,000 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=400,quality=95/https://www.bhphotovideo.com/images/fb/prompter_people_flexp_19_flex_plus_19_teleprompter_1397625.jpg"},{"cat":"accessories","label":"Accessories","name":"Hollyland Pyro S","price":"₹1,300 / day","src":"https://www.hollyland.com/wp-content/uploads/2024/05/Rectangle-2308-4.png"},{"cat":"audio","label":"Audio","name":"Hollyland Lark M2","price":"₹500 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=400,quality=95/https://www.bhphotovideo.com/images/fb/hollyland_hl_lark_m2_combo_lark_m2_2_person_wireless_1809525.jpg"},{"cat":"audio","label":"Audio","name":"DJI Mic 2","price":"₹500 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=400,quality=95/https://www.bhphotovideo.com/images/fb/dji_cp_rn_00000325_01_dji_mic_2_2_1800665.jpg"},{"cat":"drones","label":"Drones","name":"DJI Air 3S","price":"₹2,000 / day","src":"https://www-cdn.djiits.com/cms/uploads/ef97699c719414c2138ae8cca2806760@374*374.png"},{"cat":"drones","label":"Drones","name":"DJI Mavic 4 Pro","price":"₹3,500 / day","src":"https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=500/https://www.bhphotovideo.com/images/images500x500/dji_cp_ma_00000693_01_mavic_4_pro_fly_more_1715942899_1830249.jpg"}];
+const grid = document.getElementById('grid');
+const count = document.getElementById('count');
+let cat = 'all';
+function show() {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const list = GEAR.filter(g => (cat==='all' || g.cat===cat) && (!q || (g.name+' '+g.label).toLowerCase().includes(q)));
+  count.textContent = list.length + ' items';
+  grid.innerHTML = list.map(g => {
+    const msg = encodeURIComponent('Hi, I want to enquire about ' + g.name + '. Please share availability and pricing.');
+    return '<article class="card"><div class="shot"><img alt="" src="'+g.src.replace(/"/g,'&quot;')+'"/></div><div class="meta"><div class="cat">'+g.label+'</div><h3>'+g.name.replace(/</g,'')+'</h3><div class="price"><b>'+g.price.replace(' / day','')+'</b> / day</div><a class="ask" target="_blank" href="https://wa.me/919505011266?text='+msg+'">Enquire</a></div></article>';
+  }).join('') || '<p class="empty">Nothing matches that search.</p>';
+}
+document.getElementById('chips').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  cat = b.dataset.cat;
+  document.querySelectorAll('#chips button').forEach(x => x.classList.toggle('on', x===b));
+  show();
+});
+document.getElementById('q').addEventListener('input', show);
+document.getElementById('quoteForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const text = 'Hi, I need a rental quote.\nName: '+f.get('name')+'\nPhone: '+f.get('phone')+'\nDates: '+f.get('start')+' to '+f.get('end')+'\nGear: '+f.get('gear')+'\nNotes: '+(f.get('notes')||'-');
+  window.open('https://wa.me/919505011266?text='+encodeURIComponent(text), '_blank');
+});
+const today = new Date().toISOString().slice(0,10);
+document.querySelector('[name=start]').min = today;
+document.querySelector('[name=end]').min = today;
+show();
+</script>
 </body>
 </html>
